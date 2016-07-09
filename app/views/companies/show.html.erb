@@ -1,4 +1,19 @@
-<p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_company_path(@company) %> |
-<%= link_to 'Back', companies_path %>
+<h2>
+	<%= @company.name%>
+</h2>
+
+
+
+
+
+<% @company.profiles.each do |profile| %>
+
+	<p> <%= profile.company_id%> </p>
+
+	<h5>Products</h5>
+
+   
+
+<% end %>
+

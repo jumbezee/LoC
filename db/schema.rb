@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160708164954) do
+ActiveRecord::Schema.define(version: 20160708224638) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,25 +31,26 @@ ActiveRecord::Schema.define(version: 20160708164954) do
   add_index "employees", ["email"], name: "uk_employees_name", unique: true, using: :btree
 
   create_table "products", force: :cascade do |t|
-    t.integer "companies_id",              null: false
+    t.integer "company_id",                null: false
     t.string  "title",         limit: 80
     t.string  "path_to_image", limit: 250
     t.string  "description",   limit: 250
+    t.integer "price"
   end
 
-  add_index "products", ["companies_id", "title", "description"], name: "uk_products_name", unique: true, using: :btree
+  add_index "products", ["company_id", "title", "description"], name: "uk_products_name", unique: true, using: :btree
 
   create_table "profiles", force: :cascade do |t|
-    t.string  "email",        limit: 80
-    t.integer "companies_id",            null: false
-    t.string  "first_name",   limit: 80
-    t.string  "last_name",    limit: 80
-    t.string  "gender",       limit: 8
-    t.string  "locale",       limit: 80
+    t.string  "email",      limit: 80
+    t.integer "company_id",            null: false
+    t.string  "first_name", limit: 80
+    t.string  "last_name",  limit: 80
+    t.string  "gender",     limit: 8
+    t.string  "locale",     limit: 80
   end
 
-  add_index "profiles", ["companies_id", "first_name", "last_name"], name: "uk_profiles_name", unique: true, using: :btree
+  add_index "profiles", ["company_id", "first_name", "last_name"], name: "uk_profiles_name", unique: true, using: :btree
 
-  add_foreign_key "products", "companies", column: "companies_id", name: "fk_products_companies_id"
-  add_foreign_key "profiles", "companies", column: "companies_id", name: "fk_profiles_companies_id"
+  add_foreign_key "products", "companies", name: "fk_products_company"
+  add_foreign_key "profiles", "companies", name: "fk_profiles_company"
 end
