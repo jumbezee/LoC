@@ -5,13 +5,14 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json https://imagesforproducts.s3.amazonaws.com/path/to/file.ext
   def index
-    @products = Product.all
+
+    @products = Product.order("id").paginate(page: params[:page])
   end
 
   # GET /products/1
   # GET /products/1.json
   def show
-    @products = Product.find(params[:id])
+    @products = Product.order("id").find(params[:id])
     # @products = Product.all
   end
 
@@ -22,7 +23,7 @@ class ProductsController < ApplicationController
 
   # GET /products/1/edit
   def edit
-    @product = Product.find(params[:id])
+    @product = Product.order("id").find(params[:id])
   end
 
   # POST /products

@@ -1,17 +1,23 @@
+
 <% if user_signed_in? %>
         <% if current_user.admin?%>
           <% @cl = ""%>
-          <h1>Listing Profiles</h1>
+        <%else%>
+          <%@cl = "hidden"%>
+        <% end %>
+    <% else %>
+      <% @cl = "hidden" %>
+<%end%>
 
-              <table class="<%=@cl%>">
-                <thead>
-                  <tr>
-                    <th colspan="3"></th>
-                  </tr>
-                </thead>
 
-                <tbody>
-                  <% @profiles.each do |profile| %>
+<% provide(:title, 'All profiles') %>
+<h1>All users</h1>
+
+<%= will_paginate %>
+
+<table>
+  <tbody>
+  <% @profiles.each do |profile| %>
                     <tr>
                       <td><%= profile.first_name%> | </td> 
                       <td><%= profile.last_name%> | </td> 
@@ -23,21 +29,8 @@
                       <td><%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' }, class: @cl  %></td>
                     </tr>
                   <% end %>
-                </tbody>
-              </table>
+  </tbody>
+</table>
 
-              <br>
-
-            <%= link_to 'New Profile', new_profile_path, class: @cl %>
-
-        <%else%>
-          <%@cl = "hidden"%>
-        <% end %>
-      <% else %>
-         <% @cl = "hidden" %>
-
-<%end%>
-
-
-
-
+<%= will_paginate %>
+<%= link_to 'New Profile', new_profile_path, class: @cl %>

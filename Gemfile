@@ -58,7 +58,9 @@ group :development, :test do
   gem 'fog'
   gem 'aws-sdk-rails'
   gem 'devise'
-  gem 'cancan'
+
+  gem 'will_paginate', '3.0.7'
+  gem 'bootstrap-will_paginate', '0.0.10'
 end
 
 

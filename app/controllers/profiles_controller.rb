@@ -5,13 +5,13 @@ class ProfilesController < ApplicationController
   # GET /profiles
   # GET /profiles.json
   def index
-    @profiles = Profile.all
+    @profiles = Profile.order("id").paginate(page: params[:page])
   end
 
   # GET /profiles/1
   # GET /profiles/1.json
   def show
-    @profiles = Profile.find(params[:id])
+    @profiles = Profile.order("id").find(params[:id])
   end
 
   # GET /profiles/new
@@ -22,7 +22,7 @@ class ProfilesController < ApplicationController
   # GET /profiles/1/edit
   def edit
 
-    @profile = Profile.find(params[:id])
+    @profile = Profile.order("id").find(params[:id])
 
   end
 

@@ -1,0 +1,9 @@
+<table>
+	<tr><th>Name</th></tr>
+		<% for profile in @profiles %>
+			<tr><td><%= profile.first_name %></td></tr>
+		<% end %>
+
+</table>
+	<%= pagination_links(@profile_pages)%>
+<hr></hr>

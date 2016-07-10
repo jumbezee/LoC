@@ -8,15 +8,13 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
-    @companies = Company.all
+    @companies = Company.order("id").all
   end
 
   # GET /companies/1
   # GET /companies/1.json
   def show
-   @company = Company.find(params[:id])
-   
-
+   @company = Company.order("id").find(params[:id])
   end
 
   # GET /companies/new
@@ -26,7 +24,7 @@ class CompaniesController < ApplicationController
 
   # GET /companies/1/edit
   def edit
-    @company = Company.find(params[:id])
+    @company = Company.order("id").find(params[:id])
   end
 
   # POST /companies
