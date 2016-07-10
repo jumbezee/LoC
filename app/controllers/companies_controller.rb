@@ -1,7 +1,10 @@
 class CompaniesController < ApplicationController
   before_filter :authenticate_user!, :only => [:create, :update, :destroy, :new, :edit, :show]
   before_action :set_company, only: [:show, :edit, :update, :destroy]
-  before_filter :rootlaw!, only: [:create, :update, :destoy, :new, :edit]
+  before_filter :rootlaw!, only: [:create, :update, :destroy, :new, :edit]
+
+
+  load 'update_locale.rb'
   # GET /companies
   # GET /companies.json
   def index
@@ -23,17 +26,19 @@ class CompaniesController < ApplicationController
 
   # GET /companies/1/edit
   def edit
+    @company = Company.find(params[:id])
   end
 
   # POST /companies
   # POST /companies.json
   def create
     @company = Company.new(company_params)
-
+    @a = UpdateLocale.new
     respond_to do |format|
       if @company.save
         format.html { redirect_to @company, notice: 'Company was successfully created.' }
         format.json { render :show, status: :created, location: @company }
+        @a.filling_locale
       else
         format.html { render :new }
         format.json { render json: @company.errors, status: :unprocessable_entity }
@@ -44,10 +49,12 @@ class CompaniesController < ApplicationController
   # PATCH/PUT /companies/1
   # PATCH/PUT /companies/1.json
   def update
+    @a = UpdateLocale.new
     respond_to do |format|
       if @company.update(company_params)
         format.html { redirect_to @company, notice: 'Company was successfully updated.' }
         format.json { render :show, status: :ok, location: @company }
+         @a.filling_locale
       else
         format.html { render :edit }
         format.json { render json: @company.errors, status: :unprocessable_entity }
@@ -73,6 +80,6 @@ class CompaniesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def company_params
-      params.fetch(:company, {})
+      params.require(:company).permit(:name, :city, :country)
     end
 end

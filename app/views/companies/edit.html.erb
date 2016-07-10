@@ -1,6 +1,36 @@
-<h1>Editing Company</h1>
+<h1>Editing Company: <%= @company.name %></h1>
 
-<%= render 'form' %>
+
+<div>
+<%= form_for :company, url: company_path(@company), method: :put do |f| %>
+	<% if @company && @company.errors.any? %>
+	<p>
+		<ul>
+		<% @company.errors.full_messages.each do |msg| %>
+			<div class="alert alert-danger">
+				<li><%= msg %></li>
+			</div>
+		<% end %>
+		</ul>
+	</p>
+	<% end %>
+	<p>
+		Name <br />
+		<%= f.text_area :name, style: "width: 300px;height: 70px"%>
+	</p>
+	<p>
+		City <br />
+		<%= f.text_area :city, style: "width: 300px;height: 70px"%>
+	</p>
+	<p>
+		Country <br />
+		<%= f.text_area :country, style: "width: 300px;height: 70px"%>
+	</p>
+	<p>
+		<%= render 'form' %>
+	</p>
+<% end %> 
+</div>
 
 <%= link_to 'Show', @company %> |
 <%= link_to 'Back', companies_path %>
