@@ -3,17 +3,54 @@
 	<%= @company.name%>
 </h2>
 
+<table class="table table-hover"> 
+	<h3>Products</h3>
+	<thead> 
+		<tr> 
+			<th>#</th> 
+			<th>Image</th> 
+			<th>Title</th>
+			<th>Description</th> 
+			<th>Price</th> 
+		</tr> 
+	</thead> 
+	<tbody> 
+	 	<% i = 1 %>
+		<% @company.products.each do |product| %>
+			<tr> 
+				<th scope="row"><%= i%></th>
+					<td><img src="<%= product.path_to_image%>" width="100" height="50"/></td> 
+					<td><%= product.title%></a></td> 
+					<td><%= product.description%></td> 
+					<td><%= product.price%></td> 
+					<td><%= link_to 'Show', product %></td>
+				<% i += 1%>
+			</tr> 
+		<% end %>
+		
+	</tbody> 
+</table>
 
-
-
-
-<% @company.products.each do |profile| %>
-
-	<p> <%= profile.company_id%> </p>
-
-	<h5>Products</h5>
-
-   
-
-<% end %>
-
+<table class="table table-hover"> 
+	<h3>Profiles</h3>
+	<thead> 
+		<tr> 
+			<th>#</th> 
+			<th>First name</th>
+			<th>Last name</th> 
+			<th>Gender</th>  
+		</tr> 
+	</thead> 
+	<tbody> 
+	 	<% i = 1 %>
+		<% @company.profiles.each do |profile| %>
+			<tr> 
+				<th scope="row"><%= i%></th>
+					<td><%= profile.first_name%></td> 
+					<td><%= profile.last_name%></td> 
+					<td><%= profile.gender%></td> 
+				<% i += 1%>
+			</tr> 
+		<% end %>	
+	</tbody> 
+</table>

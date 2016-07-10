@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use postgresql as the database for Active Record
@@ -52,6 +53,10 @@ group :development, :test do
   gem "factory_girl_rails", "~> 4.0"
   gem "database_cleaner"
   gem "pg_search"
+  gem 'aws-sdk', '~> 2'
+  gem 'aws-s3', :require => 'aws/s3'
+  gem 'fog'
+  gem 'aws-sdk-rails'
 end
 
 

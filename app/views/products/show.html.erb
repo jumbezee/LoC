@@ -1,5 +1,15 @@
 
-
+<img src="<%= @product.path_to_image%>" width="250" height="200"/>
 <h1><%= @product.title %></h1>
+<h3><%= @product.description %></h3>
+<h3><%= @product.price %></h3>
+
+<%= link_to 'Edit', edit_product_path(@product) %> |
+<%= link_to 'Back', products_path %>
+
+
+
+
+
 
 
