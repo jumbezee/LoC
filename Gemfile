@@ -57,6 +57,7 @@ group :development, :test do
   gem 'aws-s3', :require => 'aws/s3'
   gem 'fog'
   gem 'aws-sdk-rails'
+  gem 'devise'
 end
 
 

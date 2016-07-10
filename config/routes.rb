@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
 
- 
+
+  
+
+
+  devise_for :users
+  devise_for :admins
   resources :products
   resources :employees
   resources :profiles
@@ -11,6 +16,7 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
+  root 'companies#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
