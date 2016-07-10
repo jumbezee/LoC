@@ -10,7 +10,11 @@ class ApplicationController < ActionController::Base
   private
   
   def rootlaw!
-    if current_user.admin?
+    if user_signed_in?
+      if current_user.admin?
+      else
+        redirect_to root_path
+      end
     else
       redirect_to root_path
     end
