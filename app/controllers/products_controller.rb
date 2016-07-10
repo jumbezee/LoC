@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
-
+  before_filter :authenticate_user!, :only => [:create, :update, :destroy, :new, :edit, :show]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
-
+  before_filter :rootlaw!
   # GET /products
   # GET /products.json https://imagesforproducts.s3.amazonaws.com/path/to/file.ext
   def index

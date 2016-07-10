@@ -1,4 +1,9 @@
 <p id="notice"><%= notice %></p>
-<h1><%= @profiles.company_id %></h1>
+<h1>Company id: <%= @profiles.company_id %></h1>
+<p><%= @profiles.first_name %></p>
+<p><%= @profiles.last_name %></p>
+<p><%= @profiles.email %></p>
+<p><%= @profiles.gender %></p>
+
 <%= link_to 'Edit', edit_profile_path(@profile) %> |
 <%= link_to 'Back', profiles_path %>

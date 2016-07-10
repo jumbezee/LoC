@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+<% if user_signed_in? %>
+        <% if current_user.admin?%>
+          <% @cl = ""%>
+        <%else%>
+          <%@cl = "hidden"%>
+        <% end %>
+        <%else %>
+        <% @cl = "hidden "%>
+<% end %>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <title>LoC</title>
@@ -9,17 +18,36 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<div align = "right">
-		  						<% if user_signed_in? %>
-									<%= current_user.username %> | <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "btn btn-default navbar-btn", style: "width: 80%;
+  <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-7"> 
+    <ul class="nav navbar-nav"> 
+      <li class="active">
+        <a href="/">Home</a>
+      </li> 
+      <li>
+        <a href="/companies">Companies</a>
+      </li> 
+      <li>
+        <a href="/profiles", class="<%=@cl%>">Profiles</a>
+      </li> 
+      <li>
+        <a href="#">About us</a>
+      </li> 
+    </ul> 
+    <div align = "right">
+                  <% if user_signed_in? %>
+                  <% if current_user.admin?%>
+                      <% @cl = ""%>
+                    <%else%>
+                      <%@cl = "hidden"%>
+                    <% end %>
+                  <%= current_user.username %> | <%= link_to 'Sign out', destroy_user_session_path, method: :delete, class: "btn btn-default navbar-btn", style: "width: 80%;
   max-width: 90px;
   box-shadow:
    0 1px 4px rgba(0, 0, 0, .3),
    -20px 0 20px -20px rgba(0, 0, 0, .8),
    20px 0 20px -20px rgba(0, 0, 0, .8),
    0 0 40px rgba(0, 0, 0, .1) inset;"%>
-								<% else %>
-                
+                <% else %>
                 <%= link_to 'Sign up', new_user_registration_path, class: "btn btn-default navbar-btn", style: "width: 80%;
   max-width: 90px;
   box-shadow:
@@ -27,7 +55,7 @@
    -20px 0 20px -20px rgba(0, 0, 0, .8),
    20px 0 20px -20px rgba(0, 0, 0, .8),
    0 0 40px rgba(0, 0, 0, .1) inset;"%> 
-									
+                  
                 <%= link_to 'Sign in', new_user_session_path, class: "btn btn-default navbar-btn", style: "width: 80%;
   max-width: 90px;
   box-shadow:
@@ -36,10 +64,10 @@
    20px 0 20px -20px rgba(0, 0, 0, .8),
    0 0 40px rgba(0, 0, 0, .1) inset;"%> 
                
-								<% end %>	
-						</div>		
-						
-<%= yield %>
+                <% end %> 
+            </div>    
+  </div>       
+              <%= yield %>
 
 </body>
 </html>

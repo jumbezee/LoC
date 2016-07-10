@@ -1,7 +1,7 @@
 class ProfilesController < ApplicationController
-
-  before_action :set_profile, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authenticate_user!, :only => [:create, :update, :destroy, :new, :edit, :show, :index]
+  before_action :set_profile, only: [:show, :edit, :update, :destroy, :new]
+  before_filter :rootlaw!
   # GET /profiles
   # GET /profiles.json
   def index
@@ -21,6 +21,9 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1/edit
   def edit
+
+    @profile = Profile.find(params[:id])
+
   end
 
   # POST /profiles
@@ -71,6 +74,6 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.fetch(:profile, {})
+      params.require(:profile).permit(:first_name, :last_name, :email, :gender)
     end
 end

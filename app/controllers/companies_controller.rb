@@ -1,7 +1,7 @@
 class CompaniesController < ApplicationController
-  
+  before_filter :authenticate_user!, :only => [:create, :update, :destroy, :new, :edit, :show]
   before_action :set_company, only: [:show, :edit, :update, :destroy]
-
+  before_filter :rootlaw!, only: [:create, :update, :destoy, :new, :edit]
   # GET /companies
   # GET /companies.json
   def index

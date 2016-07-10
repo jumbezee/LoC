@@ -58,6 +58,7 @@ group :development, :test do
   gem 'fog'
   gem 'aws-sdk-rails'
   gem 'devise'
+  gem 'cancan'
 end
 
 
